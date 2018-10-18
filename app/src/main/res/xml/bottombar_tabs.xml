@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/first2page"
+        icon="@drawable/ic_shouye"
+        title="首页"
+        inActiveColor="#000000"
+        activeColor="#000000"
+        />
+    <tab
+        id="@+id/add1"
+        icon="@drawable/ic_add"
+        title="添加"
+        inActiveColor="#000000"
+        activeColor="#000000"
+
+        />
+    <tab
+        id="@+id/help"
+        icon="@drawable/ic_help"
+        title="帮助"
+        inActiveColor="#000000"
+        activeColor="#000000"
+        />
+</tabs>

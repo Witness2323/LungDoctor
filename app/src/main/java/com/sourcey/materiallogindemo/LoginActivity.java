@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.input_password) EditText _passwordText;
     @BindView(R.id.btn_login) Button _loginButton;
+    @BindView(R.id.btn_login1)Button _loginButton1;
     @BindView(R.id.link_signup) TextView _signupLink;
 
     public void init(){
@@ -70,6 +71,19 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        _loginButton1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+                //setClass函数的第一个参数是一个Context对象
+                //Context是一个类，Activity是Context类的子类，也就是说，所有的Activity对象，都可以向上转型为Context对象
+                //setClass函数的第二个参数是一个Class对象，在当前场景下，应该传入需要被启动的Activity类的class对象
+                intent.setClass(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+
+            }});
 
         _signupLink.setOnClickListener(new View.OnClickListener() {
 
@@ -132,8 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                         // On complete call either onLoginSuccess or onLoginFailed
                         EditText uid=(EditText)findViewById(R.id.input_ID);
                         EditText pwd=(EditText)findViewById(R.id.input_password);
-                         String id=uid.getText().toString().trim();
-                         String pw=pwd.getText().toString().trim();
+                        String id=uid.getText().toString().trim();
+                        String pw=pwd.getText().toString().trim();
                         SendByHttpClient(id,pw);
 
                         progressDialog.dismiss();
@@ -173,7 +187,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-       Toast.makeText(getBaseContext(), "登录失败，请核对用户名和密码", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "登录失败，请核对用户名和密码", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }

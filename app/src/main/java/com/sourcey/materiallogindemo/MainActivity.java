@@ -10,7 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
-
+import  com.roughike.bottombar.*;
+import  android.support.annotation.*;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -35,6 +36,23 @@ public class MainActivity extends AppCompatActivity {
                 return  true;
             }
         });
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(int tabId) {
+                switch (tabId){
+                    case R.id.first2page:
+                        break;
+                    case R.id.add1:
+                        break;
+                    case R.id.help:
+                }
+            }
+        });
+
+
+
+
     }
 
     @Override
