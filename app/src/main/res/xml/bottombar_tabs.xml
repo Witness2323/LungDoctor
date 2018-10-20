@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tabs>
+<tabs >
     <tab
         id="@+id/first2page"
         icon="@drawable/ic_shouye"

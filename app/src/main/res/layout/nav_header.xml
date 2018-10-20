@@ -4,6 +4,9 @@
     android:layout_height="180dp"
     android:padding="10dp"
     android:background="@color/accent">
+
+
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_image"
         android:layout_width="70dp"
