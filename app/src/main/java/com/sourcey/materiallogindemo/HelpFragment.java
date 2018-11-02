@@ -2,27 +2,23 @@ package com.sourcey.materiallogindemo;
 
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.app.ActionBar;
-import com.sourcey.materiallogindemo.MainActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
-import android.widget.Toast;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.*;
-import android.widget.SimpleAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.content.*;
-import android.net.*;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  * Created by Belal on 1/23/2018.
  */
@@ -55,15 +51,19 @@ public class HelpFragment extends Fragment {
                 switch (arg2) {
                     case 0:
                         Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(getActivity(),AboutUs_Activity.class);
+                        startActivity(intent);
                         break;
                     case 1:
                         Toast.makeText(getActivity(), "2", Toast.LENGTH_LONG).show();
+                        Intent intent2=new Intent(getActivity(),About_use_Activity.class);
+                        startActivity(intent2);
                         break;
                     case 2:
-                        Intent intent = new Intent();
-                        intent.setData(Uri.parse("http://blog.csdn.net/zhangvalue"));
-                        intent.setAction(Intent.ACTION_VIEW);
-                        HelpFragment.this.startActivity(intent); //启动浏览器
+                        Intent intent1 = new Intent();
+                        intent1.setData(Uri.parse("https://baike.baidu.com/item/%E8%82%BA%E7%BB%93%E8%8A%82/8554561?fr=aladdin"));
+                        intent1.setAction(Intent.ACTION_VIEW);
+                        HelpFragment.this.startActivity(intent1); //启动浏览器
 
                         Toast.makeText(getActivity(), "3", Toast.LENGTH_LONG).show();
                         break;
@@ -102,7 +102,7 @@ public class HelpFragment extends Fragment {
         map = new HashMap<String, Object>();
         map.put("title", "我要反馈");
 
-        map.put("img", R.drawable.ic_help);
+        map.put("img", R.drawable.ic_help );
         list.add(map);
 
         return list;

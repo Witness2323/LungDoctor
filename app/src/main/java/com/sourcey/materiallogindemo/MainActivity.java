@@ -1,51 +1,76 @@
 package com.sourcey.materiallogindemo;
-import  com.sourcey.materiallogindemo.R;
-import android.support.v4.app.Fragment;
+
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v7.widget.Toolbar;
-import  com.roughike.bottombar.*;
-import android.support.v4.app.FragmentTransaction;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
-import java.util.*;
-import  android.os.PersistableBundle;
-public class MainActivity extends AppCompatActivity {
+
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
+
+import java.util.ArrayList;
+import java.util.List;
+public class MainActivity extends AppCompatActivity implements  popupWindow.OnFragmentInteractionListener {
     private DrawerLayout mDrawerLayout;
+    private static final int FLING_MIN_DISTANCE = 50;   //最小距离
+    private static final int FLING_MIN_VELOCITY = 0;  //最小速度
     private   BottomBar bottomBar;
     FragmentManager fm;
+    GestureDetector mGestureDetector;
+    float x1 = 0;
+    float x2 = 0;
+    float y1 = 0;
+    float y2 = 0;
+
     private String[] tags = new String[]{"HomeFragment", "AddFragment", "HelpFragment"};
-    private List<Fragment> fragments = new ArrayList<>();
-    Fragment HomeFragment1, AddFragment1, HelpFragment1;
-    private Fragment mContent;//当前fragment
+    public static  List<Fragment> fragments = new ArrayList<>();
+    public static Fragment HomeFragment1, AddFragment1, HelpFragment1;
+    public Fragment mContent;//当前fragment
     ActionBar actionBar1;
     @Override
     protected void onCreate(@Nullable  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = findViewById(R.id.nav_view);
+
+
       actionBar1=getSupportActionBar();
         if(actionBar1 !=null){
             actionBar1.setDisplayHomeAsUpEnabled(true);
-            actionBar1.setHomeAsUpIndicator(R.drawable.ic_menu_18pt);
+            actionBar1.setHomeAsUpIndicator(R.drawable.icon2menu);
         }
         init();
         navView.setCheckedItem(R.id.profile);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    if(item.getItemId()==R.id.history){
+                        Intent intent4 = new Intent(MainActivity.this,History_activity.class);
+                        startActivity(intent4);
+
+                    }
                 mDrawerLayout.closeDrawers();
                 return  true;
             }
@@ -97,7 +122,37 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //继承了Activity的onTouchEvent方法，直接监听点击事件
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            //当手指按下的时候
+            x1 = event.getX();
+            y1 = event.getY();
+        }
+        if(event.getAction() == MotionEvent.ACTION_UP) {
+            //当手指离开的时候
+            x2 = event.getX();
+            y2 = event.getY();
+            if(y1 - y2 > 50) {
+                Toast.makeText(MainActivity.this, "向上滑", Toast.LENGTH_SHORT).show();
+            } else if(y2 - y1 > 50) {
+                Toast.makeText(MainActivity.this, "向下滑", Toast.LENGTH_SHORT).show();
+            } else if(x1 - x2 > 50) {
+                actionBar1.show();
+                switchFragment(mContent, fragments.get(1),1);
+            } else if(x2 - x1 > 50) {
+                actionBar1.show();
+                switchFragment(mContent, fragments.get(0),0);
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+
+
     private void init() {
         fm = getSupportFragmentManager();
         HomeFragment1 = new HomeFragment();
@@ -112,6 +167,21 @@ public class MainActivity extends AppCompatActivity {
         ft.add(R.id.fragment_container, mContent);
         ft.commitAllowingStateLoss();
     }
+
+    public boolean onTouch(View v, MotionEvent event) {
+        // TODO Auto-generated method stub
+        return mGestureDetector.onTouchEvent(event);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        popupWindow popupWindow1 =new popupWindow();
+        FragmentManager fm1;
+        fm1=getSupportFragmentManager();
+        FragmentTransaction transaction = fm1.beginTransaction();
+        transaction.show(popupWindow1).commit();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
         if (mContent != to) {
             mContent = to;
             FragmentTransaction transaction = fm.beginTransaction();
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
             if (!to.isAdded()) { // 先判断是否被add过
                 transaction.hide(from)
                         .add(R.id.fragment_container, to, tags[position]).commitAllowingStateLoss(); // 隐藏当前的fragment，add下一个到Activity中
@@ -200,6 +271,40 @@ public class MainActivity extends AppCompatActivity {
                     .commitAllowingStateLoss();
         }
     }
+    public interface MyTouchListener {
+        public void onTouchEvent(MotionEvent event);
+    }
+    public interface SwitchFragment{
+        public void switchFragment(Fragment from, Fragment to, int position);
+    }
 
+    // 保存MyTouchListener接口的列表
+    private ArrayList<MyTouchListener> myTouchListeners = new ArrayList<MainActivity.MyTouchListener>();
 
+    /**
+     * 提供给Fragment通过getActivity()方法来注册自己的触摸事件的方法
+     * @param listener
+     */
+    public void registerMyTouchListener(MyTouchListener listener) {
+        myTouchListeners.add(listener);
+    }
+
+    /**
+     * 提供给Fragment通过getActivity()方法来取消注册自己的触摸事件的方法
+     * @param listener
+     */
+    public void unRegisterMyTouchListener(MyTouchListener listener) {
+        myTouchListeners.remove( listener );
+    }
+
+    /**
+     * 分发触摸事件给所有注册了MyTouchListener的接口
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        for (MyTouchListener listener : myTouchListeners) {
+            listener.onTouchEvent(ev);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 }

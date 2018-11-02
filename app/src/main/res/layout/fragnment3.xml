@@ -11,8 +11,8 @@
         android:layout_height="108dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="68dp"
         android:src="@drawable/icon_image"
         tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
 

@@ -1,18 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtFragment"
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
 
-    <Button
-        android:id="@+id/btnFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="按钮" />
-</LinearLayout>
+        android:layout_marginTop="?android:attr/actionBarSize">
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/text_field_boxes1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:labelText="姓名"
+            app:useDenseSpacing="true"
+            app:panelBackgroundColor="#FFFAFA"
+            app:helperText="请输入姓名"
+            app:helperTextColor="#D3D3D3"
+            app:primaryColor="#778899"
+            app:secondaryColor="#CDC9C9"
+            app:hasClearButton="true"
+            app:maxCharacters="4"
+            app:iconSignifier="@drawable/icons8_id_32">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+
+                android:text="" />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_field_boxes2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="年龄"
+                app:useDenseSpacing="true"
+                app:maxCharacters="3"
+                app:helperText="请输入年龄"
+                app:primaryColor="#778899"
+                app:helperTextColor="#D3D3D3"
+                app:secondaryColor="#CDC9C9"
+                app:panelBackgroundColor="#F8F8FF"
+                app:iconSignifier="@drawable/icons8_future_32"
+               >
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    app:suffix="\岁"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_field_boxes3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasClearButton="true"
+                app:labelText="性别"
+                app:useDenseSpacing="true"
+                app:maxCharacters="1"
+                app:primaryColor="#778899"
+                app:helperText="请输入性别(男/女）"
+                app:helperTextColor="#D3D3D3"
+                app:secondaryColor="#CDC9C9"
+                app:panelBackgroundColor="#FFFAFA"
+                app:iconSignifier="@drawable/icons8_zhongxing_32"
+               >
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_field_boxes4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:useDenseSpacing="true"
+                app:labelText="患病时长"
+                app:maxCharacters="3"
+                app:helperText="请输入患病时长"
+                app:primaryColor="#778899"
+                app:helperTextColor="#D3D3D3"
+                app:secondaryColor="#CDC9C9"
+                app:panelBackgroundColor="#F8F8FF"
+                app:iconSignifier="@drawable/icons8_clock_32"
+               >
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+
+                    app:suffix="\年"
+                    android:maxLines="1"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_field_boxes5"
+                android:layout_width="304dp"
+                android:layout_height="wrap_content"
+                app:hasClearButton="true"
+                app:helperText="Helper is here"
+                app:helperTextColor="#D3D3D3"
+                app:iconSignifier="@drawable/icons8_add1month_32"
+                app:labelText="就诊时间"
+                app:maxCharacters="3"
+                app:panelBackgroundColor="#FFFAFA"
+                app:primaryColor="#778899"
+                app:secondaryColor="#CDC9C9"
+                app:useDenseSpacing="true">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+
+                    android:text="@string/Jiuzhen" />
+
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+
+
+        </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/view_back"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="3333"
+
+        android:src="@drawable/ic_menu_18pt"
+        android:theme="@style/RippleWhite" />
+    </LinearLayout>
+
+
+
