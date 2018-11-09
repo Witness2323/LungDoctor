@@ -1,6 +1,7 @@
 package com.sourcey.materiallogindemo;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
+import com.huantansheng.easyphotos.EasyPhotos;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.SimpleTextChangedWatcher;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
@@ -67,6 +72,7 @@ public class AddFragment extends Fragment {
 
 
         final TextFieldBoxes textFieldBoxes = view.findViewById(R.id.text_field_boxes1);
+        final ExtendedEditText extendedEditText = view.findViewById(R.id.edit_text_4);
             final TextFieldBoxes HuanBing=view.findViewById(R.id.text_field_boxes5);
         HuanBing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,12 +99,29 @@ public class AddFragment extends Fragment {
 
                         String sAgeFormat = getResources().getString(R.string.Jiuzhen);
                         sAgeFormat=String.format(dateStr);
-                        HuanBing.setHelperText(dateStr);
+                      extendedEditText.setText(dateStr);
 
 
                     }
                 }, calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH));
                 dialog.show();
+            }
+        });
+        ImageButton b1=(ImageButton) view.findViewById(R.id.view_back);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EasyPhotos.createAlbum(AddFragment.this, true, GlideEngine.getInstance())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                        .setFileProviderAuthority("com.sourcey.materiallogindemo.fileprovider")//参数说明：见下方`FileProvider的配置`
+                        .setCount(1)//参数说明：最大可选数，默认1
+                        .start(0);
+             //   Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_LONG).show();
+
+                //  FragmentManager fm;
+                //  fm = getSupportFragmentManager();
+                //  FragmentTransaction transaction = fm.beginTransaction();
+                // transaction.show(popupWindow.newInstance()).commitAllowingStateLoss();
+
             }
         });
 
@@ -117,26 +140,29 @@ public class AddFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ImageButton b1=(ImageButton) getActivity().findViewById(R.id.view_back);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_LONG).show();
-              //  FragmentManager fm;
-              //  fm = getSupportFragmentManager();
-              //  FragmentTransaction transaction = fm.beginTransaction();
-               // transaction.show(popupWindow.newInstance()).commitAllowingStateLoss();
-
-            }
-        });
 
 
 
             }
+    List<String> mSelected = new ArrayList<>();
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == -1) {
+
+            //返回图片地址集合：如果你只需要获取图片的地址，可以用这个
+            ArrayList<String> resultPaths = data.getStringArrayListExtra(EasyPhotos.RESULT_PATHS);
+            //返回图片地址集合时如果你需要知道用户选择图片时是否选择了原图选项，用如下方法获取
+            boolean selectedOriginal = data.getBooleanExtra(EasyPhotos.RESULT_SELECTED_ORIGINAL, false);
+
+            mSelected.clear();
+            mSelected.addAll(resultPaths);
+        }
+    }
 
 
-
-    public void showPopueWindow(View view) {
+       // public void showPopueWindow(View view) {
 
 
       /*  bt_album.setOnClickListener(new View.OnClickListener() {
@@ -182,4 +208,3 @@ public class AddFragment extends Fragment {
 
 
     }
-}

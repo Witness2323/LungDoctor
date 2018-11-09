@@ -4,17 +4,13 @@ package com.sourcey.materiallogindemo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
 
 import lecho.lib.hellocharts.listener.ColumnChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
@@ -31,33 +27,10 @@ import lecho.lib.hellocharts.view.LineChartView;
  * Created by Belal on 1/23/2018.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  {
     public View v;
-    private ViewPager mViewPaper;
-    private List<ImageView> images;
-    private List<View> dots;
-    private int currentItem;
-    //记录上一次点的位置
-    private int oldPosition = 0;
-    //存放图片的id
-    private int[] imageIds = new int[]{
-            R.drawable.home_bg,
-            R.drawable.home_bg,
-            R.drawable.home_bg,
-            R.drawable.home_bg,
-            R.drawable.home_bg
-    };
-    //存放图片的标题
-    private String[] titles = new String[]{
-            "轮播1",
-            "轮播2",
-            "轮播3",
-            "轮播4",
-            "轮播5"
-    };
-    private TextView title;
-    private ViewPagerAdapter adapter;
-    private ScheduledExecutorService scheduledExecutorService;
+
+
     private ColumnChartView mColumnChartView;
 
     /*========== 数据相关 ==========*/
@@ -87,10 +60,8 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
     }
+
     private void initView() {
         mColumnChartView = (ColumnChartView) v.findViewById(R.id.chart);
         mColumnChartView.setOnValueTouchListener(new ValueTouchListener());

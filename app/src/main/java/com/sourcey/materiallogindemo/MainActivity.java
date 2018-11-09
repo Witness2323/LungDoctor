@@ -1,7 +1,6 @@
 package com.sourcey.materiallogindemo;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.IdRes;
@@ -28,7 +27,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.ArrayList;
 import java.util.List;
-public class MainActivity extends AppCompatActivity implements  popupWindow.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private static final int FLING_MIN_DISTANCE = 50;   //最小距离
     private static final int FLING_MIN_VELOCITY = 0;  //最小速度
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements  popupWindow.OnFr
 
     private String[] tags = new String[]{"HomeFragment", "AddFragment", "HelpFragment"};
     public static  List<Fragment> fragments = new ArrayList<>();
-    public static Fragment HomeFragment1, AddFragment1, HelpFragment1;
+    public static Fragment RealHomeFragment1, AddFragment1, HelpFragment1,HistoryFragment1;
     public Fragment mContent;//当前fragment
     ActionBar actionBar1;
     @Override
@@ -153,16 +152,19 @@ public class MainActivity extends AppCompatActivity implements  popupWindow.OnFr
 
 
 
+
     private void init() {
         fm = getSupportFragmentManager();
-        HomeFragment1 = new HomeFragment();
+        RealHomeFragment1 = new RealHomeFragment();
          AddFragment1 = new AddFragment();
          HelpFragment1 = new HelpFragment();
-        fragments.add(0, HomeFragment1);
+         HistoryFragment1 =new HomeFragment();
+        fragments.add(0, RealHomeFragment1);
         fragments.add(1, AddFragment1);
         fragments.add(2, HelpFragment1);
+        fragments.add(3,HistoryFragment1);
 
-        mContent = HomeFragment1 ;
+        mContent = RealHomeFragment1 ;
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_container, mContent);
         ft.commitAllowingStateLoss();
@@ -173,14 +175,7 @@ public class MainActivity extends AppCompatActivity implements  popupWindow.OnFr
         return mGestureDetector.onTouchEvent(event);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        popupWindow popupWindow1 =new popupWindow();
-        FragmentManager fm1;
-        fm1=getSupportFragmentManager();
-        FragmentTransaction transaction = fm1.beginTransaction();
-        transaction.show(popupWindow1).commit();
-    }
+
 
 
     @Override

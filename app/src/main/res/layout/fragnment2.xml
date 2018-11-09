@@ -28,6 +28,7 @@
             app:iconSignifier="@drawable/icons8_id_32">
 
             <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/edit_text_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -120,6 +121,7 @@
                >
 
                 <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/edit_text_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -133,19 +135,18 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp">
 
             <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
                 android:id="@+id/text_field_boxes5"
-                android:layout_width="304dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hasClearButton="true"
                 app:helperText="Helper is here"
                 app:helperTextColor="#D3D3D3"
                 app:iconSignifier="@drawable/icons8_add1month_32"
                 app:labelText="就诊时间"
-                app:maxCharacters="3"
                 app:panelBackgroundColor="#FFFAFA"
                 app:primaryColor="#778899"
                 app:secondaryColor="#CDC9C9"
@@ -168,17 +169,80 @@
 
         </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/view_back"
-        android:layout_width="45dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="20dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="3333"
 
-        android:src="@drawable/ic_menu_18pt"
-        android:theme="@style/RippleWhite" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginTop="10dp">
+
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/text_field_boxes6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hasClearButton="true"
+            app:panelBackgroundColor="#FFFAFA"
+            app:labelText="上传照片"
+            app:primaryColor="#778899"
+            app:secondaryColor="#CDC9C9"
+            app:useDenseSpacing="true">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:layout_width="329dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+
+                android:text="@string/Jiuzhen" />
+
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <ImageButton
+            android:id="@+id/view_back"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="360dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="3333"
+
+            android:src="@drawable/ic_menu_18pt"
+            android:theme="@style/RippleWhite" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_shangchuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:shadowColor="@color/primary_darker"
+            android:text="上传"
+            android:textColor="@color/bb_darkBackgroundColor" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_quxiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:shadowColor="@color/primary_darker"
+            android:text="取消"
+            android:textColor="@color/bb_darkBackgroundColor" />
+    </RelativeLayout>
     </LinearLayout>
 
 

@@ -1,6 +1,11 @@
 package com.sourcey.materiallogindemo;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
+
 import com.sourcey.materiallogindemo.FruitAdapter.OnItemClickLitener;
 
 import java.util.ArrayList;
@@ -50,8 +56,23 @@ public class History_activity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position)
             {
-                Toast.makeText(History_activity.this, position + " click",
-                        Toast.LENGTH_SHORT).show();
+                final ProgressDialog progressDialog = new ProgressDialog(History_activity.this,
+                        R.style.AppTheme_Dark_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("加载ing……");
+                progressDialog.show();
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                // On complete call either onLoginSuccess or onLoginFailed
+
+
+                                progressDialog.dismiss();
+                            }
+                        }, 5000);
+                Intent intent12 = new Intent(History_activity.this, HomeActivity.class);
+
+                startActivity(intent12);
             }
 
             @Override
@@ -67,11 +88,19 @@ public class History_activity extends AppCompatActivity {
 
     private void initFruits(){
         fruitList.clear();
-        for (int i = 0; i <50 ; i++) {
+        for (int i = 0; i <10 ; i++) {
             Random random=new Random();
             int index=random.nextInt(fruits.length);
             fruitList.add(fruits[index]);
         }
+    }
+
+    public void addFragment(Fragment ft) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ftraTransaction = fm.beginTransaction();
+        ftraTransaction.addToBackStack(null);
+
+        ftraTransaction.commit();
     }
 
 

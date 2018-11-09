@@ -67,6 +67,9 @@ public class HelpFragment extends Fragment {
 
                         Toast.makeText(getActivity(), "3", Toast.LENGTH_LONG).show();
                         break;
+                    case 3:
+                        Intent intent3=new Intent(getActivity(),FeedBcakActivity.class);
+                        startActivity(intent3);
                     default:
                         break;
                 }
